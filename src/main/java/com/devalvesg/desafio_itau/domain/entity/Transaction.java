@@ -3,22 +3,29 @@ package com.devalvesg.desafio_itau.domain.entity;
 import com.devalvesg.desafio_itau.domain.request.TransactionRequest;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.io.Serializable;
 import java.time.OffsetDateTime;
 
 @Entity(name = "transactions")
-@Data
+@Getter
+@Setter
 public class Transaction implements Serializable {
 
-    @Id @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Id @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
     private boolean deleted = false;
-    private double value;
+    private double amount;
     private OffsetDateTime occurredAt;
 
     public Transaction(TransactionRequest request) {
-        setValue(request.getValue());
+        setAmount(request.getAmount());
         setOccurredAt(request.getOccurredAt());
+    }
+
+    public Transaction() {
+
     }
 }

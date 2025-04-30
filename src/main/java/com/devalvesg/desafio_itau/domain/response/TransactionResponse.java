@@ -17,7 +17,7 @@ public class TransactionResponse {
 
     public TransactionResponse(Transaction entity){
         setId(entity.getId());
-        setValue(entity.getValue());
+        setValue(entity.getAmount());
         setDeleted(entity.isDeleted());
         setOccurredAt(entity.getOccurredAt());
     }
