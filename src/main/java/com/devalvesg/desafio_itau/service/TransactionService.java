@@ -31,6 +31,7 @@ public class TransactionService implements ITransactionService {
         repository.save(entity);
     }
 
+    @CacheEvict(cacheNames = "statistics", allEntries = true)
     @Override
     public void deleteTransactions() {
         repository.deleteAllTransactions();

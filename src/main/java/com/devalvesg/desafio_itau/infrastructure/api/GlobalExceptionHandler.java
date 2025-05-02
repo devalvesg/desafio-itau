@@ -36,6 +36,6 @@ public class GlobalExceptionHandler {
     public ResponseEntity<Object> handleUnexpectedException(Exception ex) {
         logger.error(String.format("Unexpected error - Message: %s, StrackTrace: %s", ex.getMessage(), Arrays.toString(ex.getStackTrace())));
 
-        return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 }
