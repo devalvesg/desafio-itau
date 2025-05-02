@@ -1,5 +1,6 @@
 package com.devalvesg.desafio_itau.infrastructure.api;
 
+import com.devalvesg.desafio_itau.infrastructure.api.exceptions.BusinessException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -22,6 +23,13 @@ public class GlobalExceptionHandler {
         });
 
         return new ResponseEntity<>(HttpStatus.UNPROCESSABLE_ENTITY);
+    }
+
+    @ExceptionHandler(BusinessException.class)
+    public ResponseEntity<Object> handleBusinessException(BusinessException ex) {
+        logger.warn(String.format("Business error - Message: %s, StrackTrace: %s", ex.getMessage(), Arrays.toString(ex.getStackTrace())));
+
+        return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
     }
 
     @ExceptionHandler(Exception.class)

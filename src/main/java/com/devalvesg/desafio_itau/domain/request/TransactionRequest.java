@@ -4,10 +4,9 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.FutureOrPresent;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Past;
 import lombok.Getter;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Getter
 public class TransactionRequest {
@@ -15,5 +14,5 @@ public class TransactionRequest {
     @NotNull(message = "Transaction value is required") @Min(value = 0, message = "Transaction value must be equal to or greater than 0") @JsonProperty("valor")
     private double amount;
     @NotNull(message = "Transaction date is required") @FutureOrPresent(message = "Transaction date must be equal to or greater than today") @JsonProperty("dataHora")
-    private OffsetDateTime occurredAt;
+    private LocalDateTime occurredAt;
 }

@@ -7,7 +7,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.io.Serializable;
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @Entity(name = "transactions")
 @Getter
@@ -18,7 +18,7 @@ public class Transaction implements Serializable {
     private Long id;
     private boolean deleted = false;
     private double amount;
-    private OffsetDateTime occurredAt;
+    private LocalDateTime occurredAt;
 
     public Transaction(TransactionRequest request) {
         setAmount(request.getAmount());

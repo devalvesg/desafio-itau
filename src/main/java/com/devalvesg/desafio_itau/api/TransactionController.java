@@ -2,6 +2,7 @@ package com.devalvesg.desafio_itau.api;
 
 import com.devalvesg.desafio_itau.domain.request.TransactionRequest;
 import com.devalvesg.desafio_itau.domain.response.StatisticsResponse;
+import com.devalvesg.desafio_itau.infrastructure.api.exceptions.BusinessException;
 import com.devalvesg.desafio_itau.service.TransactionService;
 import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
@@ -10,7 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.time.OffsetDateTime;
+import java.time.LocalDateTime;
 
 @RestController
 @RequestMapping("/transacao")
@@ -35,7 +36,7 @@ public class TransactionController {
     }
 
     @GetMapping("/estatisticas")
-    public ResponseEntity<StatisticsResponse> getStatistics(@RequestParam("dataInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime beginDate, @RequestParam("dataFinal") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) OffsetDateTime endDate) {
+    public ResponseEntity<StatisticsResponse> getStatistics(@RequestParam("dataInicio") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime beginDate, @RequestParam("dataFinal") @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime endDate) throws BusinessException {
         StatisticsResponse response = transactionService.getStats(beginDate, endDate);
         return ResponseEntity.status(HttpStatus.OK).body(response);
     }
